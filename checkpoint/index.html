@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        class Timer {
+            constructor {
+                this.time = 0
+                this. intervalId = null
+                this.container = document.createElement('div')
+                this.timeText = document.createElement('span')
+                this.startButton = document.createElement('button')
+                this.stopButton = document.createElement('button')
+                this.pauseButton = document.createElement('button')
+                this.startButton.textContent = 'Start'
+                this.stopButton.textContent = 'Stop'
+                this.pauseButton.textContent = 'Pause'
+                this.timeText.textContent = '00:00:00'
+                this.container.appendChild(this.timeText)
+                this.container.appendChild(this.startButton)
+                this.container.appendChild(this.stopButton)
+                this.container.appendChild(this.pauseButton)
+                this.startButton.addEventListener('click', () => this.start())
+                this.startButton.addEventListener('click', () => this.stop())
+                this.startButton.addEventListener('click', () => this.pause())
+                document.getElementById('app').appendChild(this.container)
+            }
+
+            start() {
+                this.intervalId = setInterval(() => {
+                    this.time++
+                    const minutes = Math.floor(this.time / 60)
+                    .toString()
+                    .padStart(2, '0')
+                    const seconds = (this.time % 60).toString().padStart(2, '0')
+                    const miliseconds = (this.time % 1)
+                    .toString()
+                    .substring(2, 4)
+                    .padStart(2, '0')
+                    this.timeText.textContent = `${minutes}:${seconds}:${miliseconds}
+                }, 100)
+            }
+        }
+    </script>
+</body>
+</html>
